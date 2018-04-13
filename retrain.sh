@@ -4,7 +4,7 @@ export TF_CPP_MIN_LOG_LEVEL=2
 
 ARCHITECTURE=nasnet_mobile
 TFHUB_MODULE="https://tfhub.dev/google/imagenet/nasnet_mobile/feature_vector/1"
-TRAINING_STEPS=300
+TRAINING_STEPS=800
 LEARNING_RATE=0.015
 
 #Batch sizes
@@ -29,8 +29,8 @@ python3 -m retrain \
 	--bottleneck_dir=tf_files/bottlenecks \
 	--image_dir=$IMAGE_DIR \
 	--model_dir=tf_files/models/ \
-	--summaries_dir="tf_files/training_summaries/"${ARCHITECTURE}"/lr_"${LEARNING_RATE} \
-	--output_graph="tf_files/training_summaries/"${ARCHITECTURE}"/retrained_graph_${LEARNING_RATE}.pb" \
+	--summaries_dir="tf_files/training_summaries/"${ARCHITECTURE}"/ts_optimization/ts_"${TRAINING_STEPS} \
+	--output_graph="tf_files/training_summaries/"${ARCHITECTURE}"/ts_optimization/retrained_graph_${TRAINING_STEPS}.pb" \
 	--output_labels=tf_files/retrained_labels.txt \
 	--print_misclassified_test_images \
 
