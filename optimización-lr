@@ -1,5 +1,5 @@
-LR - 0.01
-
+INFO:tensorflow:Final test accuracy = 74.3% (N=35)
+INFO:tensorflow:=== MISCLASSIFIED TEST IMAGES ===
 INFO:tensorflow:                  data/training/arm/2018-02-24_1721911844829287400.jpg  hand
 INFO:tensorflow:                                 data/training/arm/alexarmrit.jpg.jpeg  hand
 INFO:tensorflow:                           data/training/arm/Sydney27sNewArm2.jpg.jpeg  hand
@@ -9,17 +9,19 @@ INFO:tensorflow:                 data/training/hand/2016-03-11_12036240544420118
 INFO:tensorflow:data/training/hand/3D-Printed-Prosthetic-Hand-3rd-version-2-1080x675.jpg.jpeg  arm
 INFO:tensorflow:          data/training/hand/73f242b632ab52ae0fcc5c631e64b845.jpg.jpeg  arm
 INFO:tensorflow:data/training/hand/3D-printed-flexihand-made-from-filaflex-by-gyrobot.jpg copy.jpeg  arm
+INFO:tensorflow:Save final result to : tf_files/training_summaries/nasnet_mobile/retrained_graph_0.01.pb
 
-LR - 0.001 - Final 80
-
+INFO:tensorflow:Restoring parameters from /tmp/_retrain_checkpoint
+INFO:tensorflow:Final test accuracy = 80.0% (N=35)
 INFO:tensorflow:=== MISCLASSIFIED TEST IMAGES ===
 INFO:tensorflow:                  data/training/arm/2018-02-24_1721911844829287400.jpg  hand
-INFO:tensorflow:                  data/training/arm/2017-04-08_1488727029292517392.jpg  hand
-INFO:tensorflow:                                 data/training/arm/alexarmrit.jpg.jpeg  hand
 INFO:tensorflow:                           data/training/arm/Sydney27sNewArm2.jpg.jpeg  hand
+INFO:tensorflow:                 data/training/hand/2016-02-01_1175598753674014286.jpg  arm
 INFO:tensorflow:                 data/training/hand/2016-03-11_1203624054442011831.jpg  arm
 INFO:tensorflow:data/training/hand/3D-Printed-Prosthetic-Hand-3rd-version-2-1080x675.jpg.jpeg  arm
+INFO:tensorflow:          data/training/hand/73f242b632ab52ae0fcc5c631e64b845.jpg.jpeg  arm
 INFO:tensorflow:data/training/hand/3D-printed-flexihand-made-from-filaflex-by-gyrobot.jpg copy.jpeg  arm
+INFO:tensorflow:Save final result to : tf_files/training_summaries/nasnet_mobile/retrained_graph_0.001.pb
 
 LR:0.02
 INFO:tensorflow:Final test accuracy = 71.4% (N=35)
