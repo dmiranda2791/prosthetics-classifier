@@ -4,7 +4,7 @@ export TF_CPP_MIN_LOG_LEVEL=2
 
 ARCHITECTURE=nasnet_mobile
 TFHUB_MODULE="https://tfhub.dev/google/imagenet/nasnet_mobile/feature_vector/1"
-TRAINING_STEPS=800
+TRAINING_STEPS=500
 LEARNING_RATE=0.015
 
 #Batch sizes
