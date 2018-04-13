@@ -1,26 +1,37 @@
-export TRAINING_STEPS=300
-export LEARNING_RATE=0.01
-export ARCHITECTURE=inception_v3
+
 export TF_CPP_MIN_VLOG_LEVEL=1
+export TF_CPP_MIN_LOG_LEVEL=2
 
-echo "ARCHITECTURE=$ARCHITECTURE"
-echo "----Hyperparameters----"
-echo "training_steps=$TRAINING_STEPS"
-echo "learning_rate=$LEARNING_RATE"
+ARCHITECTURE=nasnet_mobile
+TFHUB_MODULE="https://tfhub.dev/google/imagenet/nasnet_mobile/feature_vector/1"
+TRAINING_STEPS=300
+LEARNING_RATE=0.015
 
-echo "----Starting training----"
+#Batch sizes
+TRAIN_BATCH_SIZE=10
+VALIDATION_BATCH_SIZE=-1 # Complete set
+TEST_BATCH_SIZE=-1 # Complete set
+
+# Data distribution
+TESTING_SET_PERCENTAGE=10
+VALIDATION_SET_PERCENTAGE=10
+IMAGE_DIR="data/training/"
 
 python3 -m retrain \
-	--flip_left_right \
-	--bottleneck_dir=tf_files/bottlenecks \
+	--tfhub_module=$TFHUB_MODULE \
 	--learning_rate=$LEARNING_RATE \
 	--how_many_training_steps=$TRAINING_STEPS \
+	--testing_percentage=$TESTING_SET_PERCENTAGE \
+	--validation_percentage=$VALIDATION_SET_PERCENTAGE \
+	--train_batch_size=$TRAIN_BATCH_SIZE \
+	--validation_batch_size=$VALIDATION_BATCH_SIZE \
+	--test_batch_size=$TEST_BATCH_SIZE \
+	--bottleneck_dir=tf_files/bottlenecks \
+	--image_dir=$IMAGE_DIR \
 	--model_dir=tf_files/models/ \
-	--summaries_dir=tf_files/training_summaries/"${ARCHITECTURE}" \
-	--output_graph="tf_files/retrained_graph_${ARCHITECTURE}_${TRAINING_STEPS}_${LEARNING_RATE}.pb" \
+	--summaries_dir="tf_files/training_summaries/"${ARCHITECTURE}"/lr_"${LEARNING_RATE} \
+	--output_graph="tf_files/training_summaries/"${ARCHITECTURE}"/retrained_graph_${LEARNING_RATE}.pb" \
 	--output_labels=tf_files/retrained_labels.txt \
-	--architecture="${ARCHITECTURE}" \
-	--image_dir=data/training/ \
-	--print_misclassified_test_images
+	--print_misclassified_test_images \
 
 echo "----Training complete----"
