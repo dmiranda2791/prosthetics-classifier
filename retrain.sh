@@ -5,7 +5,7 @@ export TF_CPP_MIN_LOG_LEVEL=2
 ARCHITECTURE=nasnet_mobile
 TFHUB_MODULE="https://tfhub.dev/google/imagenet/nasnet_mobile/feature_vector/1"
 TRAINING_STEPS=500
-LEARNING_RATE=0.015
+LEARNING_RATE=0.016
 
 #Batch sizes
 TRAIN_BATCH_SIZE=10
@@ -13,11 +13,18 @@ VALIDATION_BATCH_SIZE=-1 # Complete set
 TEST_BATCH_SIZE=-1 # Complete set
 
 # Data distribution
-TESTING_SET_PERCENTAGE=10
+TESTING_SET_PERCENTAGE=15
 VALIDATION_SET_PERCENTAGE=10
 IMAGE_DIR="data/training/"
 
+# augmentations
+RANDOM_BRIGHTNESS=30
+RANDOM_SCALE=30
+
 python3 -m retrain \
+	--flip_left_right \
+	--random_brightness=$RANDOM_BRIGHTNESS \
+	--random_scale=$RANDOM_SCALE \
 	--tfhub_module=$TFHUB_MODULE \
 	--learning_rate=$LEARNING_RATE \
 	--how_many_training_steps=$TRAINING_STEPS \
@@ -29,8 +36,8 @@ python3 -m retrain \
 	--bottleneck_dir=tf_files/bottlenecks \
 	--image_dir=$IMAGE_DIR \
 	--model_dir=tf_files/models/ \
-	--summaries_dir="tf_files/training_summaries/"${ARCHITECTURE}"/ts_optimization/ts_"${TRAINING_STEPS} \
-	--output_graph="tf_files/training_summaries/"${ARCHITECTURE}"/ts_optimization/retrained_graph_${TRAINING_STEPS}.pb" \
+	--summaries_dir="tf_files/training_summaries/"${ARCHITECTURE}"/with_aug/lr_"${LEARNING_RATE}"_ts_"${TRAINING_STEPS}"_rb_"${RANDOM_BRIGHTNESS}"_rs_"${RANDOM_SCALE} \
+	--output_graph="tf_files/training_summaries/"${ARCHITECTURE}"/with_aug/retrained_graph_lr_"${LEARNING_RATE}"_ts_"${TRAINING_STEPS}"_rb_"${RANDOM_BRIGHTNESS}"_rs_"${RANDOM_SCALE}".pb" \
 	--output_labels=tf_files/retrained_labels.txt \
 	--print_misclassified_test_images \
 
